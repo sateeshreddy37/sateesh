@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+   name: exer4
+spc:
+  containers:
+     - name: nginx1
+       image: nginx
+       ports:
+         - containerPort: 80
+     - name: httpd1
+       image: httpd
+       ports:
+         - containerPort: 80

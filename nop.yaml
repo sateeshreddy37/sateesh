@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nop
+spec:
+  containers:
+    - name: nop
+      image: sateeshreddy12/nopcommerce:latest
+      ports:
+        - containerPort: 5000

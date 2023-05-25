@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: joip
+spec:
+  containers:
+     - name: java
+       image: openjdk-17-jdk
+       ports:
+         - containerPort: 8081
+     - name: mavem
+       image: maven
+       ports:
+         - containerPort: 8082
