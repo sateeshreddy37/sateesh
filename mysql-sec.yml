@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: Secrets
+metadata:
+   name: mysql
+data:
+  MYSQL_ROOT_PASSWORD: ^zu
+  MYSQL_USER: ^z
+  MYSQL_PASSWORD: ^zu
+  MYSQL_DATABASE: ^z

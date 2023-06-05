@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-cm
+data:
+  MYSQL_DATABASE: skr
+  MYSQL_ROOT_PASSWORD: sateesh12
+  MYSQL_USER: iam
+  MYSQL_PASSWORD: sateesh12
