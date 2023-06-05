@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: mysql
+  template: 
+    metadata:
+      name: mysql
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:8
+          ports: 
+            - containerPort: 3306
+          env:
+            - name: MYSQL_USER 
+              value: sateesh
+            - name: MYSQL_PASSWORD
+              value: panga
+            - name: MYSQL_ROOT_PASSWORD
+              value: panga
+            - name: MYSQL_DATABASE
+              value: family
+          volumeMounts:
+            - name: mysqldb
+              mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+    - metadata:
+        name: mysqldb
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        storageClassName: managed
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+spec:
+  type: ClusterIP
+  selector:
+    db: mysql
+  ports:
+    - port: 1233
+      protocol: TCP
+      targetPort: 3306
