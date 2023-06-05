@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gol
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gol
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      name: gol
+      labels:
+        app: gol
+    spec:
+      containers:
+        - name: gol
+          image: sateeshreddy12/gameoflife
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gol-svc
+spec:
+  selector:
+    app: gol
+  ports:
+    - name: gol-svc
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+  type: LoadBalancer

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nop
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+      maxSurge: 50%
+      maxUnavailable: 50%
+  template:
+    metadata:
+      name: nop
+      labels:
+        app: nop
+    spec:
+      containers:
+        - name: nop
+          image: sateeshreddy12/nopcommerce 
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MYSQL_SERVER
+              value: mysql
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nop-svc
+spec:
+  selector:
+    app: nop
+  ports:
+    - name: nop-svc
+      port: 5000
+      targetPort: 5000
+      protocol: TCP
+  type: LoadBalancer
